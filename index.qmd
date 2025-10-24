@@ -269,60 +269,81 @@ Stadiums are categories. Bars encode value by **length/position**, which is easy
 Let's create a publication-ready visualization:
 
 ```{python}
-#| label: stage-4-formatting
+#| label: stage-4-final
 #| echo: false
+#| fig-cap: "Average runs per game by stadium in 2010 (Colorado highlighted)."
 
-# Stage 4: Formatting for Your Audience
-# Create a professional, publication-ready visualization
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
-# Set style for professional appearance
+# consistent style for business look
 plt.style.use("seaborn-v0_8-whitegrid")
 
-# Create the main visualization
-fig, ax = plt.subplots(figsize=(8, 6))
+# Defensive: compute sorted table if it doesn't exist
+try:
+    avgDF_2010_sorted
+except NameError:
+    avgDF_2010_sorted = (
+        avgDF_2010
+        .sort_values("totalRuns", ascending=True)
+        .reset_index(drop=True)
+    )
 
-# Create color array for highlighting Colorado
-colorado_colors = ["darkorchid" if stadium == "COL" else "lightgrey" 
-                   for stadium in avgDF_2010_sorted.home]
+# Colors: highlight Colorado
+colors = ["darkorchid" if t == "COL" else "lightgrey"
+          for t in avgDF_2010_sorted["home"]]
 
-# Create horizontal bar chart
-bars = ax.barh(avgDF_2010_sorted.home, avgDF_2010_sorted.totalRuns, color=colorado_colors)
+# Figure
+fig, ax = plt.subplots(figsize=(9, 6), layout="constrained")
+bars = ax.barh(avgDF_2010_sorted["home"], avgDF_2010_sorted["totalRuns"], color=colors)
 
-# Add title and labels
-ax.set_title("Colorado (COL) is the Most Run-Friendly Ballpark in 2010", 
-             fontsize=16, fontweight='bold', pad=20)
-ax.set_xlabel("Average Runs Per Game", fontsize=12)
-ax.set_ylabel("Stadium (Home Team)", fontsize=12)
+# Titles / labels
+ax.set_title("Colorado (COL) is the Most Run-Friendly Ballpark in 2010", fontsize=15, fontweight="bold", pad=14)
+ax.set_xlabel("Average Runs Per Game")
+ax.set_ylabel("Stadium (Home Team)")
 
-# Add legend
-colorado_bar = plt.Rectangle((0,0),1,1, color="darkorchid", label="Colorado Rockies")
-other_bar = plt.Rectangle((0,0),1,1, color="lightgrey", label="Other Stadiums")
-ax.legend(handles=[colorado_bar, other_bar], loc='lower right', frameon=True)
+# Legend
+col_patch = plt.Rectangle((0,0), 1, 1, color="darkorchid", label="Colorado (COL)")
+oth_patch = plt.Rectangle((0,0), 1, 1, color="lightgrey",  label="Other Stadiums")
+ax.legend(handles=[col_patch, oth_patch], loc="lower right", frameon=True)
 
-# Add annotation for Colorado
-colorado_index = avgDF_2010_sorted[avgDF_2010_sorted.home == "COL"].index[0]
-colorado_runs = avgDF_2010_sorted[avgDF_2010_sorted.home == "COL"]["totalRuns"].iloc[0]
-ax.annotate(f"COL: {colorado_runs:.2f} runs/game", 
-            xy=(colorado_runs, colorado_index), 
-            xytext=(colorado_runs + 0.5, colorado_index),
-            arrowprops=dict(arrowstyle='->', color='darkorchid', lw=2),
-            fontsize=10, fontweight='bold', color='darkorchid')
+# Limits to leave room for annotation
+xmax = 1.10 * float(avgDF_2010_sorted["totalRuns"].max())
+ax.set_xlim(0, xmax)
 
-# Set x-axis to start from 0 for better comparison
-ax.set_xlim(0, max(avgDF_2010_sorted.totalRuns) * 1.1)
+# Annotate COL with offset + readable box
+labels = avgDF_2010_sorted["home"].tolist()
+if "COL" in labels:
+    yidx = labels.index("COL")
+    colorado_runs = float(avgDF_2010_sorted.loc[yidx, "totalRuns"])
 
-# Add grid for easier reading
-ax.grid(True, alpha=0.3)
+    ax.annotate(
+        f"COL: {colorado_runs:.2f} runs/game",
+        xy=(colorado_runs, yidx),
+        xytext=(colorado_runs + 0.4, yidx),
+        va="center",
+        bbox=dict(facecolor="white", alpha=0.9, edgecolor="none"),
+        arrowprops=dict(arrowstyle="->", color="darkorchid", lw=1.6),
+        color="darkorchid", fontweight="bold", fontsize=10,
+    )
 
-plt.tight_layout()
 plt.show()
-
-# Print summary statistics
-print(f"\nSummary Statistics for 2010:")
-print(f"Colorado (COL) average runs per game: {colorado_runs:.2f}")
-print(f"League average runs per game: {avgDF_2010_sorted.totalRuns.mean():.2f}")
-print(f"Colorado is {((colorado_runs / avgDF_2010_sorted.totalRuns.mean()) - 1) * 100:.1f}% above league average")
 ```
+
+```{python}
+#| label: stage-4-summary
+#| echo: false
+
+# Small printed summary (no code shown in output)
+league_avg = float(avgDF_2010_sorted["totalRuns"].mean())
+col_idx = avgDF_2010_sorted["home"].tolist().index("COL") if "COL" in avgDF_2010_sorted["home"].tolist() else None
+col_val = float(avgDF_2010_sorted.loc[col_idx, "totalRuns"]) if col_idx is not None else None
+uplift = (col_val / league_avg - 1.0) * 100 if col_val is not None else None
+
+print(f"Summary (2010): COL average runs/game = {col_val:.2f}; league average = {league_avg:.2f}; COL is {uplift:.1f}% above league average.")
+```
+
 
 ::: {.callout-important}
 ## 🤔 Discussion Questions: Stage 4 - Formatting for Your Audience
@@ -365,7 +386,7 @@ Let's create a comprehensive comparison between 2010 and 2021:
 
 ```{python}
 #| label: advanced-oo-techniques
-#| echo: true
+#| echo: false
 
 # Advanced Object-Oriented Techniques
 # Create a comprehensive comparison visualization
@@ -379,85 +400,114 @@ comparison_data = pd.merge(
 
 ## TODO: Create the visualization
 
-#| label: advanced-oo-comparison
+#| label: stage-5-final
 #| echo: false
+#| fig-cap: "Average runs per game by stadium — 2010 vs 2021 (Colorado highlighted, shared scale)."
 
-# Build comparison data from the two tables prepared earlier
-comparison_data = (
-    avgDF_2010[['home', 'totalRuns']].rename(columns={'totalRuns': 'runs_2010'})
-    .merge(
-        avgDF_2021[['home', 'totalRuns']].rename(columns={'totalRuns': 'runs_2021'}),
-        on='home', how='inner'
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# consistent style for business look
+plt.style.use("seaborn-v0_8-whitegrid")
+
+# Build comparison_data defensively if missing
+try:
+    comparison_data
+except NameError:
+    comparison_data = (
+        avgDF_2010[["home", "totalRuns"]].rename(columns={"totalRuns": "runs_2010"})
+        .merge(
+            avgDF_2021[["home", "totalRuns"]].rename(columns={"totalRuns": "runs_2021"}),
+            on="home", how="inner"
+        )
     )
-)
 
-# Fix a single stadium order (sorted by 2010) so the two panels line up
-order = (comparison_data
-         .sort_values('runs_2010', ascending=True)
-         .loc[:, 'home']
-         .tolist())
+# One consistent order (sort by 2010)
+order = (comparison_data.sort_values("runs_2010", ascending=True)["home"].tolist())
+comp_ord = comparison_data.set_index("home").loc[order].reset_index()
 
-# Reorder for plotting
-comp_ord = comparison_data.set_index('home').loc[order].reset_index()
+# Colors: highlight COL in both panels
+colors_2010 = ["darkorchid" if t == "COL" else "lightgrey" for t in comp_ord["home"]]
+colors_2021 = ["darkorchid" if t == "COL" else "lightgrey" for t in comp_ord["home"]]
 
-# Colors (highlight COL)
-colors_2010 = ["darkorchid" if t == "COL" else "lightgrey" for t in comp_ord['home']]
-colors_2021 = ["darkorchid" if t == "COL" else "lightgrey" for t in comp_ord['home']]
+# Shared x-limit for fair comparison
+xmax = 1.10 * max(float(comp_ord["runs_2010"].max()), float(comp_ord["runs_2021"].max()))
 
-# Common x-limit across both panels for fair comparison
-xmax = 1.10 * max(comp_ord['runs_2010'].max(), comp_ord['runs_2021'].max())
+# Two-panel figure (OO Matplotlib)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 7), sharey=True, layout="constrained")
 
-# Create the two-panel figure (Object-Oriented Matplotlib)
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 7), sharey=True)
-
-# Left panel: 2010
-ax1.barh(comp_ord['home'], comp_ord['runs_2010'], color=colors_2010)
-ax1.set_title("Average Runs per Game — 2010", pad=12, fontweight="bold")
+# 2010
+ax1.barh(comp_ord["home"], comp_ord["runs_2010"], color=colors_2010)
+ax1.set_title("Average Runs per Game — 2010", pad=10, fontweight="bold")
 ax1.set_xlabel("Average Runs per Game")
 ax1.set_ylabel("Stadium (Home Team)")
 ax1.set_xlim(0, xmax)
-ax1.grid(True, axis='x', alpha=0.25)
+ax1.grid(True, axis="x", alpha=0.25)
 
-# Right panel: 2021
-ax2.barh(comp_ord['home'], comp_ord['runs_2021'], color=colors_2021)
-ax2.set_title("Average Runs per Game — 2021", pad=12, fontweight="bold")
+# 2021
+ax2.barh(comp_ord["home"], comp_ord["runs_2021"], color=colors_2021)
+ax2.set_title("Average Runs per Game — 2021", pad=10, fontweight="bold")
 ax2.set_xlabel("Average Runs per Game")
 ax2.set_xlim(0, xmax)
-ax2.grid(True, axis='x', alpha=0.25)
+ax2.grid(True, axis="x", alpha=0.25)
 
-# Legend (one shared)
-col_patch = plt.Rectangle((0, 0), 1, 1, color="darkorchid", label="Colorado (COL)")
-oth_patch = plt.Rectangle((0, 0), 1, 1, color="lightgrey", label="Other Stadiums")
+# Legend once
+col_patch = plt.Rectangle((0,0), 1, 1, color="darkorchid", label="Colorado (COL)")
+oth_patch = plt.Rectangle((0,0), 1, 1, color="lightgrey",  label="Other Stadiums")
 ax2.legend(handles=[col_patch, oth_patch], loc="lower right", frameon=True)
 
 # Annotate COL in both panels (if present)
-if "COL" in comp_ord['home'].values:
-    yidx = comp_ord.index[comp_ord['home'] == "COL"][0]
+labels = comp_ord["home"].tolist()
+if "COL" in labels:
+    yidx = labels.index("COL")
 
-    # 2010 annotation
-    x2010 = comp_ord.loc[yidx, 'runs_2010']
-    ax1.annotate(f"COL: {x2010:.2f}",
-                 xy=(x2010, yidx),
-                 xytext=(x2010 + 0.4, yidx),
-                 va="center",
-                 bbox=dict(facecolor="white", alpha=0.8, edgecolor="none"),
-                 arrowprops=dict(arrowstyle="->", color="darkorchid", lw=1.5),
-                 color="darkorchid", fontweight="bold", fontsize=9)
+    # 2010
+    v2010 = float(comp_ord.loc[yidx, "runs_2010"])
+    ax1.annotate(
+        f"COL: {v2010:.2f}",
+        xy=(v2010, yidx),
+        xytext=(v2010 + 0.35, yidx),
+        va="center",
+        bbox=dict(facecolor="white", alpha=0.9, edgecolor="none"),
+        arrowprops=dict(arrowstyle="->", color="darkorchid", lw=1.6),
+        color="darkorchid", fontweight="bold", fontsize=9,
+    )
 
-    # 2021 annotation
-    x2021 = comp_ord.loc[yidx, 'runs_2021']
-    ax2.annotate(f"COL: {x2021:.2f}",
-                 xy=(x2021, yidx),
-                 xytext=(x2021 + 0.4, yidx),
-                 va="center",
-                 bbox=dict(facecolor="white", alpha=0.8, edgecolor="none"),
-                 arrowprops=dict(arrowstyle="->", color="darkorchid", lw=1.5),
-                 color="darkorchid", fontweight="bold", fontsize=9)
+    # 2021
+    v2021 = float(comp_ord.loc[yidx, "runs_2021"])
+    ax2.annotate(
+        f"COL: {v2021:.2f}",
+        xy=(v2021, yidx),
+        xytext=(v2021 + 0.35, yidx),
+        va="center",
+        bbox=dict(facecolor="white", alpha=0.9, edgecolor="none"),
+        arrowprops=dict(arrowstyle="->", color="darkorchid", lw=1.6),
+        color="darkorchid", fontweight="bold", fontsize=9,
+    )
 
-plt.suptitle("Run-Friendliness by Stadium: 2010 vs 2021 (Colorado Highlighted)",
+plt.suptitle("Run-Friendliness by Stadium: 2010 vs 2021 (Shared Scale, Colorado Highlighted)",
              y=1.02, fontsize=15, fontweight="bold")
-plt.tight_layout()
 plt.show()
+```
+
+```{python}
+#| label: stage-5-summary
+#| echo: false
+
+# Small printed summary (no code shown)
+rank2010 = comp_ord.sort_values("runs_2010", ascending=False).reset_index(drop=True)
+rank2021 = comp_ord.sort_values("runs_2021", ascending=False).reset_index(drop=True)
+
+def find_rank(df, col, team="COL"):
+    if team in df["home"].tolist():
+        return df.index[df["home"] == team][0] + 1, float(df.loc[df["home"] == team, col].iloc[0])
+    return None, None
+
+r2010, v2010 = find_rank(rank2010, "runs_2010")
+r2021, v2021 = find_rank(rank2021, "runs_2021")
+
+print(f"Comparison summary: In 2010, COL ranks #{r2010} at {v2010:.2f} runs/game; in 2021, COL ranks #{r2021} at {v2021:.2f} runs/game (shared scale).")
 ```
 
 ::: {.callout-important}

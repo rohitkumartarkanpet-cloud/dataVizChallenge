@@ -384,20 +384,19 @@ Instead of analyzing thousands of rows, aggregation summarizes performance by st
 <h2 class="anchored" data-anchor-id="stage-4-formatting-for-your-audience">Stage 4: Formatting for Your Audience</h2>
 <p><strong>Mental Model:</strong> Polish your visualization for professional presentation.</p>
 <p>Let’s create a publication-ready visualization:</p>
-<div id="cell-stage-4-formatting" class="cell" data-execution_count="4">
+<div id="cell-stage-4-final" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div>
+<div id="stage-4-final" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/stage-4-formatting-output-1.png" id="stage-4-formatting" width="758" height="567" class="figure-img"></p>
+<p><img src="index_files/figure-html/stage-4-final-output-1.png" width="875" height="587" class="figure-img"></p>
+<figcaption>Average runs per game by stadium in 2010 (Colorado highlighted).</figcaption>
 </figure>
 </div>
 </div>
+</div>
+<div id="stage-4-summary" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Summary Statistics for 2010:
-Colorado (COL) average runs per game: 10.59
-League average runs per game: 8.77
-Colorado is 20.8% above league average</code></pre>
+<pre><code>Summary (2010): COL average runs/game = 8.47; league average = 8.77; COL is -3.4% above league average.</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -413,7 +412,7 @@ Colorado is 20.8% above league average</code></pre>
 <p><strong>Question 1: Professional Formatting</strong> - What elements make this visualization suitable for a business presentation?</p>
 <p><strong>Answer:</strong></p>
 <ul>
-<li><p><strong>What makes it business-ready:</strong></p>
+<li><strong>What makes it business-ready:</strong>
 <ul>
 <li><strong>Message title</strong> states the takeaway (not just “Bar chart”).</li>
 <li><strong>Clear axes</strong> with units: “Average Runs Per Game”.</li>
@@ -423,12 +422,11 @@ Colorado is 20.8% above league average</code></pre>
 <li><strong>Zero baseline</strong> on the x-axis to keep lengths honest.</li>
 <li><strong>Tidy labels</strong> (no long tick labels overlapping; horizontal bars for many categories).</li>
 </ul></li>
-<li><p>Is the annotation on the visualization helpful? Can you fix its placement?</p></li>
-<li><p><strong>Is the annotation helpful?</strong></p>
+<li><strong>Is the annotation on the visualization helpful? Can you fix its placement?</strong>
 <ul>
 <li>Yes. It draws attention to <strong>COL</strong> and reinforces the message with a numeric value.</li>
 </ul></li>
-<li><p><strong>How I’d fix/position the annotation:</strong></p>
+<li><strong>How I’d fix/position the annotation:</strong>
 <ul>
 <li><strong>Offset the text</strong> a bit to the right of the COL bar end (e.g., <code>xytext=(+0.4, 0)</code> in data coords).</li>
 <li><strong>Align vertically</strong> to the bar center (<code>va="center"</code>) and set a modest <strong>fontsize</strong>.</li>
@@ -446,104 +444,18 @@ Colorado is 20.8% above league average</code></pre>
 <h2 class="anchored" data-anchor-id="advanced-object-oriented-techniques">Advanced Object-Oriented Techniques</h2>
 <p><strong>Mental Model:</strong> Use object-oriented matplotlib to create complex, reusable visualizations.</p>
 <p>Let’s create a comprehensive comparison between 2010 and 2021:</p>
-<div id="cell-advanced-oo-techniques" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced Object-Oriented Techniques</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive comparison visualization</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for comparison</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>comparison_data <span class="op">=</span> pd.merge(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    avgDF_2010[[<span class="st">'home'</span>, <span class="st">'totalRuns'</span>]].rename(columns<span class="op">=</span>{<span class="st">'totalRuns'</span>: <span class="st">'runs_2010'</span>}),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    avgDF_2021[[<span class="st">'home'</span>, <span class="st">'totalRuns'</span>]].rename(columns<span class="op">=</span>{<span class="st">'totalRuns'</span>: <span class="st">'runs_2021'</span>}),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    on<span class="op">=</span><span class="st">'home'</span>, how<span class="op">=</span><span class="st">'inner'</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">## </span><span class="al">TODO</span><span class="co">: Create the visualization</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: advanced-oo-comparison</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Build comparison data from the two tables prepared earlier</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>comparison_data <span class="op">=</span> (</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    avgDF_2010[[<span class="st">'home'</span>, <span class="st">'totalRuns'</span>]].rename(columns<span class="op">=</span>{<span class="st">'totalRuns'</span>: <span class="st">'runs_2010'</span>})</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    .merge(</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        avgDF_2021[[<span class="st">'home'</span>, <span class="st">'totalRuns'</span>]].rename(columns<span class="op">=</span>{<span class="st">'totalRuns'</span>: <span class="st">'runs_2021'</span>}),</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        on<span class="op">=</span><span class="st">'home'</span>, how<span class="op">=</span><span class="st">'inner'</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix a single stadium order (sorted by 2010) so the two panels line up</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> (comparison_data</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>         .sort_values(<span class="st">'runs_2010'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>         .loc[:, <span class="st">'home'</span>]</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>         .tolist())</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder for plotting</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>comp_ord <span class="op">=</span> comparison_data.set_index(<span class="st">'home'</span>).loc[order].reset_index()</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors (highlight COL)</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>colors_2010 <span class="op">=</span> [<span class="st">"darkorchid"</span> <span class="cf">if</span> t <span class="op">==</span> <span class="st">"COL"</span> <span class="cf">else</span> <span class="st">"lightgrey"</span> <span class="cf">for</span> t <span class="kw">in</span> comp_ord[<span class="st">'home'</span>]]</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>colors_2021 <span class="op">=</span> [<span class="st">"darkorchid"</span> <span class="cf">if</span> t <span class="op">==</span> <span class="st">"COL"</span> <span class="cf">else</span> <span class="st">"lightgrey"</span> <span class="cf">for</span> t <span class="kw">in</span> comp_ord[<span class="st">'home'</span>]]</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Common x-limit across both panels for fair comparison</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> <span class="fl">1.10</span> <span class="op">*</span> <span class="bu">max</span>(comp_ord[<span class="st">'runs_2010'</span>].<span class="bu">max</span>(), comp_ord[<span class="st">'runs_2021'</span>].<span class="bu">max</span>())</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the two-panel figure (Object-Oriented Matplotlib)</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">7</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Left panel: 2010</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>ax1.barh(comp_ord[<span class="st">'home'</span>], comp_ord[<span class="st">'runs_2010'</span>], color<span class="op">=</span>colors_2010)</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Average Runs per Game — 2010"</span>, pad<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Average Runs per Game"</span>)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Stadium (Home Team)"</span>)</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>ax1.set_xlim(<span class="dv">0</span>, xmax)</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>, axis<span class="op">=</span><span class="st">'x'</span>, alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Right panel: 2021</span></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>ax2.barh(comp_ord[<span class="st">'home'</span>], comp_ord[<span class="st">'runs_2021'</span>], color<span class="op">=</span>colors_2021)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Average Runs per Game — 2021"</span>, pad<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Average Runs per Game"</span>)</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>ax2.set_xlim(<span class="dv">0</span>, xmax)</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>, axis<span class="op">=</span><span class="st">'x'</span>, alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend (one shared)</span></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>col_patch <span class="op">=</span> plt.Rectangle((<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"darkorchid"</span>, label<span class="op">=</span><span class="st">"Colorado (COL)"</span>)</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>oth_patch <span class="op">=</span> plt.Rectangle((<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"lightgrey"</span>, label<span class="op">=</span><span class="st">"Other Stadiums"</span>)</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>ax2.legend(handles<span class="op">=</span>[col_patch, oth_patch], loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate COL in both panels (if present)</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"COL"</span> <span class="kw">in</span> comp_ord[<span class="st">'home'</span>].values:</span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>    yidx <span class="op">=</span> comp_ord.index[comp_ord[<span class="st">'home'</span>] <span class="op">==</span> <span class="st">"COL"</span>][<span class="dv">0</span>]</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2010 annotation</span></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>    x2010 <span class="op">=</span> comp_ord.loc[yidx, <span class="st">'runs_2010'</span>]</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>    ax1.annotate(<span class="ss">f"COL: </span><span class="sc">{</span>x2010<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>                 xy<span class="op">=</span>(x2010, yidx),</span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(x2010 <span class="op">+</span> <span class="fl">0.4</span>, yidx),</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>                 va<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>                 bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"white"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>),</span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>                 arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, color<span class="op">=</span><span class="st">"darkorchid"</span>, lw<span class="op">=</span><span class="fl">1.5</span>),</span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">"darkorchid"</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2021 annotation</span></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    x2021 <span class="op">=</span> comp_ord.loc[yidx, <span class="st">'runs_2021'</span>]</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>    ax2.annotate(<span class="ss">f"COL: </span><span class="sc">{</span>x2021<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>                 xy<span class="op">=</span>(x2021, yidx),</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(x2021 <span class="op">+</span> <span class="fl">0.4</span>, yidx),</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>                 va<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>                 bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"white"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>),</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>                 arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, color<span class="op">=</span><span class="st">"darkorchid"</span>, lw<span class="op">=</span><span class="fl">1.5</span>),</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">"darkorchid"</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Run-Friendliness by Stadium: 2010 vs 2021 (Colorado Highlighted)"</span>,</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>             y<span class="op">=</span><span class="fl">1.02</span>, fontsize<span class="op">=</span><span class="dv">15</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-advanced-oo-techniques" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/advanced-oo-techniques-output-1.png" id="advanced-oo-techniques" width="1136" height="690" class="figure-img"></p>
+<p><img src="index_files/figure-html/advanced-oo-techniques-output-1.png" id="advanced-oo-techniques" width="1259" height="701" class="figure-img"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="stage-5-summary" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>Comparison summary: In 2010, COL ranks #1 at 10.59 runs/game; in 2021, COL ranks #3 at 10.65 runs/game (shared scale).</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
