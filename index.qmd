@@ -342,9 +342,7 @@ print(f"Colorado is {((colorado_runs / avgDF_2010_sorted.totalRuns.mean()) - 1) 
   - **Tidy labels** (no long tick labels overlapping; horizontal bars for many categories).
 
 
-- Is the annotation on the visualization helpful?  Can you fix its placement?
-
-- **Is the annotation helpful?**
+- **Is the annotation on the visualization helpful?  Can you fix its placement?**
   - Yes. It draws attention to **COL** and reinforces the message with a numeric value.
   
 - **How I’d fix/position the annotation:**
