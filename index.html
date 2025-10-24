@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -61,14 +61,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -107,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📊 Challenge Requirements
+<span class="screen-reader-only">Important</span>📊 Challenge Requirements
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -130,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-⚠️ AI Partnership Required
+<span class="screen-reader-only">Warning</span>⚠️ AI Partnership Required
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -163,10 +164,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-loading-and-initial-exploration">Data Loading and Initial Exploration</h2>
 <p>Let’s start by loading the baseball data and understanding what we’re working with.</p>
 <div id="load-data" class="cell" data-message="false" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#import seaborn as sns</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load 2010 baseball season data</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df2010 <span class="op">=</span> pd.read_csv(<span class="st">"baseball10.csv"</span>)</span>
@@ -178,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"2021 data shape:"</span>, df2021.shape)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2010 data columns:"</span>, df2010.columns.tolist())</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">First few rows of 2010 data:"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df2010.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df2010.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2010 data shape: (2430, 7)
 2021 data shape: (2429, 7)
@@ -200,7 +201,7 @@ First few rows of 2010 data:
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💡 Understanding the Data
+<span class="screen-reader-only">Note</span>💡 Understanding the Data
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -219,11 +220,16 @@ First few rows of 2010 data:
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤔 Discussion Questions: Stage 1 - Declaration of Purpose
+<span class="screen-reader-only">Important</span>🤔 Discussion Questions: Stage 1 - Declaration of Purpose
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Question 1: Hypothesis Formation</strong> - Why might high altitude affect baseball performance? Is Coors Field affected by high altitude?</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><p><strong>High Altitude Effect:</strong> At high altitudes the air is less dense. This lowers drag on the baseball, so batted balls travel farther. Pitch movement also decreases, making breaking balls easier to hit. Together this usually means more home runs and more total runs.</p></li>
+<li><p><strong>Coors Field:</strong> Coors Field is in Denver (about 5,280 feet above sea level). Because of the thin air, it is known as a <strong>run-friendly</strong> ballpark and we expect higher scoring there than at most other stadiums.</p></li>
+</ul>
 </div>
 </div>
 </section>
@@ -232,7 +238,7 @@ First few rows of 2010 data:
 <p><strong>Mental Model:</strong> Gather and create all the data you need to support your message.</p>
 <p>Let’s aggregate the data to get average runs per stadium:</p>
 <div id="stage-2-content" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage 2: Curation of Content</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage 2: Curation of Content</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate data to get average runs per stadium</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Process 2010 data</span></span>
@@ -256,7 +262,7 @@ First few rows of 2010 data:
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"2010 Stadium Averages (Top 5):"</span>)</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avgDF_2010.head())</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2021 Stadium Averages (Top 5):"</span>)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avgDF_2021.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avgDF_2021.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2010 Stadium Averages (Top 5):
   home  visScore  homeScore     visHR    homeHR  totalRuns   totalHR
@@ -281,11 +287,20 @@ First few rows of 2010 data:
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤔 Discussion Questions: Stage 2 - Curation of Content
+<span class="screen-reader-only">Important</span>🤔 Discussion Questions: Stage 2 - Curation of Content
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Question 1: Data Aggregation Strategy</strong> - How many games are in the dataset? Why do we aggregate individual games into stadium averages before we start the visualization process?</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><p><strong>Dataset Size:</strong><br>
+The 2010 dataset includes <strong>2,430 games</strong>, and the 2021 dataset includes <strong>2,429 games</strong>. Each row represents a single Major League Baseball game.</p></li>
+<li><p><strong>Why Aggregate:</strong><br>
+Aggregating game-level data into <strong>average runs per stadium</strong> helps simplify complex raw data into meaningful comparisons.<br>
+Instead of analyzing thousands of rows, aggregation summarizes performance by stadium, allowing us to clearly see which ballparks tend to produce <strong>higher scoring games</strong>.</p>
+<p>This is especially important because teams play many home games—averaging the data removes random variation and highlights <strong>stadium effects</strong> rather than single-game outcomes.</p></li>
+</ul>
 </div>
 </div>
 </section>
@@ -294,7 +309,7 @@ First few rows of 2010 data:
 <p><strong>Mental Model:</strong> Choose the right geometry and aesthetics to effectively communicate your message.</p>
 <p>Let’s explore different visual approaches:</p>
 <div id="cell-stage-3-mapping-exploration" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage 3: Structuring of Visual Mappings</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage 3: Structuring of Visual Mappings</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore different geometries and aesthetics</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data for better visualization</span></span>
@@ -331,7 +346,7 @@ First few rows of 2010 data:
 <span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>,<span class="dv">1</span>].set_ylabel(<span class="st">"Stadium"</span>)</span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -346,12 +361,22 @@ First few rows of 2010 data:
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤔 Discussion Questions: Stage 3 - Structuring of Visual Mappings
+<span class="screen-reader-only">Important</span>🤔 Discussion Questions: Stage 3 - Structuring of Visual Mappings
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Question 1: Geometry Choices</strong> - Why is a horizontal bar chart better than a scatter plot for this data? - When would you choose a vertical bar chart over horizontal?</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><p><strong>Horizontal bar &gt; scatter here:</strong> Stadiums are categories. Bars encode value by <strong>length/position</strong>, which is easy to compare. A scatter plot forces many text labels on an axis and is harder to read for categories.</p></li>
+<li><p><strong>When to use vertical bars:</strong> Use vertical bars when category names are <strong>short</strong> or there are <strong>few</strong> of them, or when the audience expects <strong>left-to-right</strong> growth (e.g., time, rank).</p></li>
+</ul>
 <p><strong>Question 2: Aesthetic Mappings</strong> - What does the color highlighting accomplish in Approach 4? - How does position (x/y) compare to color for encoding data?</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><p><strong>Color highlight (COL):</strong> Color draws attention to our focus stadium <strong>without changing</strong> the scale. It guides the eye to the main story (Colorado).</p></li>
+<li><p><strong>Position vs color:</strong> <strong>Position</strong> on an axis is the <strong>most accurate</strong> way to encode magnitude. <strong>Color</strong> is supportive—good for emphasis or grouping, but not a substitute for position when showing values.</p></li>
+</ul>
 </div>
 </div>
 </section>
@@ -360,7 +385,7 @@ First few rows of 2010 data:
 <p><strong>Mental Model:</strong> Polish your visualization for professional presentation.</p>
 <p>Let’s create a publication-ready visualization:</p>
 <div id="cell-stage-4-formatting" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage 4: Formatting for Your Audience</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage 4: Formatting for Your Audience</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a professional, publication-ready visualization</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set style for professional appearance</span></span>
@@ -409,7 +434,7 @@ First few rows of 2010 data:
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Summary Statistics for 2010:"</span>)</span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Colorado (COL) average runs per game: </span><span class="sc">{</span>colorado_runs<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"League average runs per game: </span><span class="sc">{</span>avgDF_2010_sorted<span class="sc">.</span>totalRuns<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Colorado is </span><span class="sc">{</span>((colorado_runs <span class="op">/</span> avgDF_2010_sorted.totalRuns.mean()) <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">% above league average"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Colorado is </span><span class="sc">{</span>((colorado_runs <span class="op">/</span> avgDF_2010_sorted.totalRuns.mean()) <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">% above league average"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -431,11 +456,39 @@ Colorado is 20.8% above league average</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤔 Discussion Questions: Stage 4 - Formatting for Your Audience
+<span class="screen-reader-only">Important</span>🤔 Discussion Questions: Stage 4 - Formatting for Your Audience
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Question 1: Professional Formatting</strong> - What elements make this visualization suitable for a business presentation? - Is the annotation on the visualization helpful? Can you fix its placement?</p>
+<p><strong>Question 1: Professional Formatting</strong> - What elements make this visualization suitable for a business presentation?</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><p><strong>What makes it business-ready:</strong></p>
+<ul>
+<li><strong>Message title</strong> states the takeaway (not just “Bar chart”).</li>
+<li><strong>Clear axes</strong> with units: “Average Runs Per Game”.</li>
+<li><strong>Sorted bars</strong> so ranking is obvious.</li>
+<li><strong>Minimal legend</strong> or none; colors are purposeful (COL highlighted, others neutral).</li>
+<li><strong>Consistent style</strong> (grid is light; fonts readable; margins not cramped).</li>
+<li><strong>Zero baseline</strong> on the x-axis to keep lengths honest.</li>
+<li><strong>Tidy labels</strong> (no long tick labels overlapping; horizontal bars for many categories).</li>
+</ul></li>
+<li><p>Is the annotation on the visualization helpful? Can you fix its placement?</p></li>
+<li><p><strong>Is the annotation helpful?</strong></p>
+<ul>
+<li>Yes. It draws attention to <strong>COL</strong> and reinforces the message with a numeric value.</li>
+</ul></li>
+<li><p><strong>How I’d fix/position the annotation:</strong></p>
+<ul>
+<li><strong>Offset the text</strong> a bit to the right of the COL bar end (e.g., <code>xytext=(+0.4, 0)</code> in data coords).</li>
+<li><strong>Align vertically</strong> to the bar center (<code>va="center"</code>) and set a modest <strong>fontsize</strong>.</li>
+<li>Use a short, clear label like <strong>“COL: 10.6 runs/game”</strong>.</li>
+<li>Add a light <strong>bbox</strong> around the text (e.g., <code>bbox=dict(facecolor="white", alpha=0.8, edgecolor="none")</code>) so it’s readable over the grid.</li>
+<li>Keep the <strong>arrow simple</strong> (→ <code>arrowprops=dict(arrowstyle='-&gt;', color='darkorchid', lw=1.5)</code>).</li>
+<li>Ensure the annotation <strong>doesn’t collide</strong> with the figure edge by slightly increasing <strong>x-limits</strong> (e.g., <code>ax.set_xlim(0, max_val*1.1)</code>).</li>
+</ul></li>
+</ul>
+<p><strong>Summary:</strong> The final polish uses <strong>position</strong> for magnitude, <strong>color</strong> only for emphasis, a <strong>message-first title</strong>, and a <strong>clean, readable layout</strong>. The annotation is helpful once it’s offset, centered to the bar, and styled for legibility.</p>
 </div>
 </div>
 </section>
@@ -444,7 +497,7 @@ Colorado is 20.8% above league average</code></pre>
 <p><strong>Mental Model:</strong> Use object-oriented matplotlib to create complex, reusable visualizations.</p>
 <p>Let’s create a comprehensive comparison between 2010 and 2021:</p>
 <div id="advanced-oo-techniques" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced Object-Oriented Techniques</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced Object-Oriented Techniques</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive comparison visualization</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for comparison</span></span>
@@ -454,7 +507,7 @@ Colorado is 20.8% above league average</code></pre>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    on<span class="op">=</span><span class="st">'home'</span>, how<span class="op">=</span><span class="st">'inner'</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">## </span><span class="al">TODO</span><span class="co">: Create the visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">## </span><span class="al">TODO</span><span class="co">: Create the visualization</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -462,7 +515,7 @@ Colorado is 20.8% above league average</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤔 Discussion Questions: Advanced Object-Oriented Techniques
+<span class="screen-reader-only">Important</span>🤔 Discussion Questions: Advanced Object-Oriented Techniques
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -493,7 +546,7 @@ Colorado is 20.8% above league average</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📁 Getting Started
+<span class="screen-reader-only">Important</span>📁 Getting Started
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -509,7 +562,7 @@ Colorado is 20.8% above league average</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-⚠️ Cloud Storage Warning
+<span class="screen-reader-only">Warning</span>⚠️ Cloud Storage Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -522,7 +575,7 @@ Colorado is 20.8% above league average</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🎯 Object-Oriented Matplotlib Philosophy
+<span class="screen-reader-only">Note</span>🎯 Object-Oriented Matplotlib Philosophy
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -535,7 +588,7 @@ Colorado is 20.8% above league average</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💾 Important: Save Your Work Frequently!
+<span class="screen-reader-only">Warning</span>💾 Important: Save Your Work Frequently!
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -635,13 +688,14 @@ Colorado is 20.8% above league average</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
