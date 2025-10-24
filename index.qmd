@@ -488,6 +488,12 @@ plt.show()
 - **Colorado (COL)** is highlighted. In 2010 it appears at/near the **top end**. In 2021 it remains a **top-tier run-friendly park** (exact rank depends on the data).  
 - If an AI summary misses this (for example, it says the scales differ or ignores the common scale), then the conclusion would be off. The **shared scale** and **consistent ordering** are key to reading the figure correctly.
 
+## Reflection
+
+This challenge helped me practice the four stages of data visualization: defining purpose, curating data, choosing visual structure, and formatting for clarity.  
+Through object-oriented Matplotlib, I learned how consistent scales and focused color choices strengthen communication, especially when comparing multi-year results.
+
+
 :::
 
 ## Student Analysis Section: Mastering Object-Oriented Matplotlib {#student-analysis-section}
