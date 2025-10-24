@@ -270,7 +270,7 @@ Let's create a publication-ready visualization:
 
 ```{python}
 #| label: stage-4-formatting
-#| echo: true
+#| echo: false
 
 # Stage 4: Formatting for Your Audience
 # Create a professional, publication-ready visualization
@@ -382,7 +382,7 @@ comparison_data = pd.merge(
 ## TODO: Create the visualization
 
 #| label: advanced-oo-comparison
-#| echo: true
+#| echo: false
 
 # Build comparison data from the two tables prepared earlier
 comparison_data = (
@@ -468,7 +468,7 @@ plt.show()
 **Question 1: Using Subplot Layout**
 - Create a two-facet visualization that shows the total runs for 2010 and 2021 for each stadium in a single figure.  Highlight Colorado in the visualization.
 
-**Answer (what I did and why):**
+**Answer:**
 - I built a **two-panel figure** (`fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)`), one panel per year.
 - I used **horizontal bar charts** (best for many categorical labels).
 - I kept a **single stadium order** (sorted by 2010) so both panels line up.
