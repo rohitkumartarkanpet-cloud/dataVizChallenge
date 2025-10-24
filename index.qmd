@@ -65,7 +65,7 @@ Let's start by loading the baseball data and understanding what we're working wi
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import seaborn as sns
+#import seaborn as sns
 
 # Load 2010 baseball season data
 df2010 = pd.read_csv("baseball10.csv")
@@ -109,7 +109,15 @@ Our purpose is to investigate whether Coors Field in Denver, Colorado is truly t
 
 **Question 1: Hypothesis Formation**
 - Why might high altitude affect baseball performance?  Is Coors Field affected by high altitude?
-:::
+
+
+**Answer:**
+
+- **High Altitude Effect:** At high altitudes the air is less dense. This lowers drag on the baseball, so batted balls travel farther. Pitch movement also decreases, making breaking balls easier to hit. Together this usually means more home runs and more total runs.
+
+- **Coors Field:** Coors Field is in Denver (about 5,280 feet above sea level). Because of the thin air, it is known as a **run-friendly** ballpark and we expect higher scoring there than at most other stadiums.
+
+
 
 ## Stage 2: Curation of Content
 
@@ -153,7 +161,25 @@ print(avgDF_2021.head())
 
 **Question 1: Data Aggregation Strategy**
 - How many games are in the dataset? Why do we aggregate individual games into stadium averages before we start the visualization process?
-:::
+
+
+**Answer:**
+
+- **Dataset Size:**  
+  The 2010 dataset includes **2,430 games**, and the 2021 dataset includes **2,429 games**. Each row represents a single Major League Baseball game.
+
+- **Why Aggregate:**  
+  Aggregating game-level data into **average runs per stadium** helps simplify complex raw data into meaningful comparisons.  
+  Instead of analyzing thousands of rows, aggregation summarizes performance by stadium, allowing us to clearly see which ballparks tend to produce **higher scoring games**.  
+
+  This is especially important because teams play many home games—averaging the data removes random variation and highlights **stadium effects** rather than single-game outcomes.
+
+
+
+
+
+
+
 
 ## Stage 3: Structuring of Visual Mappings
 
@@ -212,11 +238,27 @@ plt.show()
 - Why is a horizontal bar chart better than a scatter plot for this data?
 - When would you choose a vertical bar chart over horizontal?
 
+**Answer:**
+
+- **Horizontal bar > scatter here:** 
+Stadiums are categories. Bars encode value by **length/position**, which is easy to compare. A scatter plot forces many text labels on an axis and is harder to read for categories.
+
+- **When to use vertical bars:**
+ Use vertical bars when category names are **short** or there are **few** of them, or when the audience expects **left-to-right** growth (e.g., time, rank).
+
+
+
 **Question 2: Aesthetic Mappings**
 - What does the color highlighting accomplish in Approach 4?
 - How does position (x/y) compare to color for encoding data?
 
-:::
+**Answer:**
+
+- **Color highlight (COL):**
+ Color draws attention to our focus stadium **without changing** the scale. It guides the eye to the main story (Colorado).
+
+- **Position vs color:** 
+**Position** on an axis is the **most accurate** way to encode magnitude. **Color** is supportive—good for emphasis or grouping, but not a substitute for position when showing values.
 
 ## Stage 4: Formatting for Your Audience
 
@@ -285,9 +327,34 @@ print(f"Colorado is {((colorado_runs / avgDF_2010_sorted.totalRuns.mean()) - 1) 
 
 **Question 1: Professional Formatting**
 - What elements make this visualization suitable for a business presentation?
+
+**Answer:**
+
+- **What makes it business-ready:**
+  - **Message title** states the takeaway (not just “Bar chart”).
+  - **Clear axes** with units: “Average Runs Per Game”.
+  - **Sorted bars** so ranking is obvious.
+  - **Minimal legend** or none; colors are purposeful (COL highlighted, others neutral).
+  - **Consistent style** (grid is light; fonts readable; margins not cramped).
+  - **Zero baseline** on the x-axis to keep lengths honest.
+  - **Tidy labels** (no long tick labels overlapping; horizontal bars for many categories).
+
+
 - Is the annotation on the visualization helpful?  Can you fix its placement?
 
-:::
+- **Is the annotation helpful?**
+  - Yes. It draws attention to **COL** and reinforces the message with a numeric value.
+  
+- **How I’d fix/position the annotation:**
+  - **Offset the text** a bit to the right of the COL bar end (e.g., `xytext=(+0.4, 0)` in data coords).
+  - **Align vertically** to the bar center (`va="center"`) and set a modest **fontsize**.
+  - Use a short, clear label like **“COL: 10.6 runs/game”**.
+  - Add a light **bbox** around the text (e.g., `bbox=dict(facecolor="white", alpha=0.8, edgecolor="none")`) so it’s readable over the grid.
+  - Keep the **arrow simple** (→ `arrowprops=dict(arrowstyle='->', color='darkorchid', lw=1.5)`).
+  - Ensure the annotation **doesn’t collide** with the figure edge by slightly increasing **x-limits** (e.g., `ax.set_xlim(0, max_val*1.1)`).
+
+**Summary:** 
+The final polish uses **position** for magnitude, **color** only for emphasis, a **message-first title**, and a **clean, readable layout**. The annotation is helpful once it’s offset, centered to the bar, and styled for legibility.
 
 
 ## Advanced Object-Oriented Techniques
